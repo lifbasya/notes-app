@@ -4,9 +4,11 @@ import { useState } from "react";
 function App() {
   const [notes, setNotes] = useState([]);
 
+  const baseUrl = "https://notesappapi-alif.vercel.app";
+
   const fetchNotes = async () => {
     try {
-      const res = await fetch("http://localhost:3000/notes");
+      const res = await fetch(`${baseUrl}/notes`);
       const result = await res.json();
       setNotes(result.data);
       console.log(result);
@@ -21,7 +23,7 @@ function App() {
 
   const addNote = async (newTitle, newContent) => {
     try {
-      const res = await fetch("http://localhost:3000/notes", {
+      const res = await fetch(`${baseUrl}/notes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +45,7 @@ function App() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/notes/${id}`, {
+      const res = await fetch(`${baseUrl}/notes/${id}`, {
         method: "DELETE",
       });
 
